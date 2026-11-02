@@ -6,4 +6,9 @@ class Greeter
     {
         return "Bonjour " . $name;
     }
+
+    public function goodbye(string $name): string
+    {
+        return "Au revoir " . $name;
+    }
 }
