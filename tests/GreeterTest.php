@@ -9,7 +9,7 @@ class GreeterTest extends TestCase
     public function testGreetReturnsBonjour(): void
     {
         $greeter = new Greeter();
-        $this->assertEquals("Salut Aya", $greeter->greet("Aya"));
+        $this->assertEquals("Bonjour Aya", $greeter->greet("Aya"));
     }
 
     public function testGoodbyeReturnsAuRevoir(): void
