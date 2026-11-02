@@ -1,0 +1,43 @@
+name: CI Mini Lab
+
+# Déclencheurs : push et pull request sur main et develop
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  # JOB 1 : tests automatiques (Intégration Continue)
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-progress --prefer-dist
+
+      - name: Execute tests via PHPUnit
+        run: vendor/bin/phpunit
+
+  # JOB 2 : build de l'image et lancement du conteneur (Livraison Continue)
+  docker:
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build de l'image Docker
+        run: docker build -t mini-lab .
+
+      - name: Lancer le conteneur
+        run: docker run -d -p 8080:80 --name web mini-lab
+
+      - name: Tester le conteneur
+        run: |
+          sleep 5
+          curl -f http://localhost:8080 | grep "Bonjour DevOps"

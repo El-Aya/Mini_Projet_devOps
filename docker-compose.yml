@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  apache:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+    ports:
+      - "8081:80"
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ecole
+    volumes:
+      - db_data:/var/lib/mysql
+volumes:
+  db_data:
