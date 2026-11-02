@@ -1,1 +1,1 @@
-{"version":2,"defects":[],"times":{"GreeterTest::testGreetReturnsBonjour":0.306,"GreeterTest::testGoodbyeReturnsAuRevoir":0}}
+{"version":2,"defects":{"GreeterTest::testGreetReturnsBonjour":7},"times":{"GreeterTest::testGreetReturnsBonjour":1.274,"GreeterTest::testGoodbyeReturnsAuRevoir":0.102}}
